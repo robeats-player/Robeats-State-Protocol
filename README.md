@@ -3,8 +3,17 @@ The packets are defined with a packet number, written in hexadecimal notation pr
 
 The packets are as follows:
 
-| Packet ID  | Description                                                           |
-| ---------- | --------------------------------------------------------------------- |
-| 0x001      | Broadcast packet, able and looking to sync.                           |
-| 0x002      | Initialising a media sync, and requesting the checksums of all songs. |
-| 0x102      | Response to 0x002, one checksum of one song. Multiple 0x102 packets will be sent until all songs' checksums have been sent, signified by an empty 0x102 packet. |
+The total size of this frame is 18bytes
+
+|Request ID|Device ID|Device name|
+|-|
+|1 byte|1 byte|16 byte|
+
+
+
+| Request ID| name | Description|
+| ----------| ---------------------------------------------------------------------|
+| 0x001     |Device Discovery| Ask devices on the same multicast socket to send their device information (see table above).|
+| 0x002     |Request songlist| Request md5 hashes. Using Unicast (ip to ip).|
+| 0x102     |Reply songlist|Response to `request songlist`. Sends a byte array with the md5 hashes of the songs to compare in unicast.|
+| 0xF     |Sync confirm|Send a confirmation that the songs have been successfully synchronized in unicast.|
