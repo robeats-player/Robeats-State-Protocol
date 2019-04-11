@@ -12,8 +12,9 @@ The total size of this frame is 18bytes
 
 
 | Request ID| name | Description|
-| ----------| ---------------------------------------------------------------------|
-| 0x001     |Device Discovery| Ask devices on the same multicast socket to send their device information (see table above).|
-| 0x002     |Request songlist| Request md5 hashes. Using Unicast (ip to ip).|
-| 0x102     |Reply songlist|Response to `request songlist`. Sends a byte array with the md5 hashes of the songs to compare in unicast.|
-| 0xF     |Sync confirm|Send a confirmation that the songs have been successfully synchronized in unicast.|
+| ----------| -----|------------|
+| 0x01     |Device Discovery| Ask devices on the same multicast socket to send their device information (see table above).|
+| 0x11     |Device Discovery Reply| Reply to the discovery by sending an UDP response directly to the sender.|
+| 0x02     |Request songlist| Request md5 hashes. Using Unicast (ip to ip).|
+| 0x12     |Reply songlist|Response to `request songlist`. Sends a byte array with the md5 hashes of the songs to compare in unicast.|
+| 0xFF      |Sync confirm|Send a confirmation that the songs have been successfully synchronized in unicast.|
