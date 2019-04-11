@@ -6,7 +6,7 @@ The packets are as follows:
 The total size of this frame is 18bytes
 
 |Request ID|Device ID|Device name|
-|-|
+|-|-|-|
 |1 byte|1 byte|16 byte|
 
 
