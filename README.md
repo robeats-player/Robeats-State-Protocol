@@ -11,7 +11,7 @@ We will be using 4567 for device discovery (UDP) and 4568 for syncing hashes (TC
 
 ### File transfer
 
-the FTP (https://tools.ietf.org/html/rfc959) protocol will be used for transfering the files between users.
+the File Transfer Protocol (https://tools.ietf.org/html/rfc959) will be used for transfering the files between users.
 
 ### The packets are as follows:
 
