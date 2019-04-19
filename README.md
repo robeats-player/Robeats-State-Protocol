@@ -1,20 +1,34 @@
 # Robeats-State-Protocol
-The packets are defined with a packet number, written in hexadecimal notation prefixed by '0x' for convenience. Typically, packets prefixed 0x0 (values between 0 and 255) are packets for requesting state, and packets prefixed 0x1 (256 and upwards) are for returning state.
 
-The packets are as follows:
+### Multicast
 
-The total size of this frame is 18bytes
+`224.5.6.7` for IPv4 and `FF02::5:6:7` for IPv6 as multicast address.
+We currently use IPv4 but is easily changed to IPv6
+
+### Ports
+Everything below 2000 is marked as reserved.
+We will be using 4567 for device discovery (UDP) and 4568 for syncing hashes (TCP)
+
+### File transfer
+
+the FTP (https://tools.ietf.org/html/rfc959) protocol will be used for transfering the files between users.
+
+### The packets are as follows:
+
+The total size of this segment is 18 bytes.
+
 
 |Request ID|Device ID|Device name|
 |-|-|-|
 |1 byte|1 byte|16 byte|
 
 
+The packets are defined with a request ID, written in hexadecimal notation prefixed by '0x' for convenience.
 
 | Request ID| name | Description|
 | ----------| -----|------------|
 | 0x01     |Device Discovery| Ask devices on the same multicast socket to send their device information (see table above).|
-| 0x11     |Device Discovery Reply| Reply to the discovery by sending an UDP response directly to the sender.|
-| 0x02     |Request songlist| Request md5 hashes. Using Unicast (ip to ip).|
+| 0x11     |Device Discovery Reply| Reply to the discovery by sending an UDP using Unicast (ip to ip).|
+| 0x02     |Request songlist| Request md5 hashes. Using Unicast.|
 | 0x12     |Reply songlist|Response to `request songlist`. Sends a byte array with the md5 hashes of the songs to compare in unicast.|
 | 0xFF      |Sync confirm|Send a confirmation that the songs have been successfully synchronized in unicast.|
